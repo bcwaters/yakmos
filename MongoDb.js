@@ -1,6 +1,7 @@
 var MongoClient = require('mongodb').MongoClient;
 const url = "mongodb://localhost:27017/";
 const dbName = "yakmos"
+let testCollection = 'comments'
 
 class MongoDB{
     
@@ -22,7 +23,7 @@ class MongoDB{
                 console.log('error connecting') 
                 throw err;};
             var dbo = db.db(dbName);
-            dbo.collection("comments").insertOne(commentObject, function(err, res) {
+            dbo.collection(testCollection).insertOne(commentObject, function(err, res) {
             if (err) {
                 console.log('error inserting')
                 throw err;
@@ -39,7 +40,7 @@ class MongoDB{
             if (err) throw err;
             var dbo = db.db(dbName);
             var query = { originUrl: originUrl };
-            dbo.collection("comments").find({}).toArray(function(err, result) {
+            dbo.collection(testCollection).find({}).toArray(function(err, result) {
             if (err) throw err;
             console.log('retrieved comments for:' + originUrl + ' #: ' + result.length);
             callback(result);

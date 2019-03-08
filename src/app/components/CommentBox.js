@@ -1,5 +1,7 @@
 import React from 'react';
 import Comment from './Comment.js'
+import CommentBoxHeader from './CommentBoxHeader.js'
+import CommentBoxFooter from './CommentBoxFooter.js'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -27,13 +29,7 @@ class CommentBox extends React.Component {
     return (
         <Container id='commentBox' style={styles.commentBox}>
             <Row noGutters>
-                <Col xs={10} id='commentBoxHeader' style={styles.commentBoxHeader}>
-                <span >
-                        comments for <a href='.'>{this.props.originURL}</a></span>
-                </Col>
-                <Col xs={2}>                
-                    <Button variant='link'>sort</Button>
-                </Col>
+              <CommentBoxHeader originURL={this.props.originURL}/>
             </Row>
             {this.state.comments.map((comment) =>
                 <Row noGutters>
@@ -43,12 +39,7 @@ class CommentBox extends React.Component {
                 </Row>
             )}
             <Row noGutters>
-                <Col xs={12}>
-                <div id='commentBoxFooter'
-                    style={{ borderStyle:'solid'}}>
-                        Add the option to add comment here
-                </div>
-                </Col>
+             <CommentBoxFooter/>
             </Row>
         </Container>
     );
