@@ -15,7 +15,6 @@ function editCommentObject(key, value){
 //test constructor
 describe('Unit Test CommentObject', function () {
   function compareJSON (commentData, expected) {
-      cy.log('testing')
     Object.entries(expected).forEach(([key,value]) => {
         expect(commentData[key]).to.eq(expected[key])
       

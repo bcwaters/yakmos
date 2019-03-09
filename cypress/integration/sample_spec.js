@@ -8,7 +8,7 @@ describe('Get CommentBox children', function() {
         //wait for the first api call to finish
         cy.wait(1500)
         //commentbox.row.col == commentChild
-        cy.get('#commentBox').children().children('#comment').should('have.length', 3)
+        cy.get('#commentContainer').children().children('#comment').should('have.length', 3)
    
   })
 })

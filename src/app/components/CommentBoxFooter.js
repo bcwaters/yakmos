@@ -23,7 +23,9 @@ class CommentBoxFooter extends React.Component {
     render() {   
         return(
             <Col xs={12}>
-                <div id='commentBoxFooter' style={styles.commentBoxFooter}>
+                <div id='commentBoxFooter' style={{
+                    display:this.props.visibility,
+                    ...styles.commentBoxFooter}}>
                 <InputGroup>
                     <FormControl as="textarea" style={{resize:'none'}} aria-label="With textarea" />
                     <InputGroup.Append>

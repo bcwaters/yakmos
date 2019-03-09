@@ -12,19 +12,23 @@ module.exports = {
         }]
     },
     plugins: [
-     
+        new CopyPlugin([
+            {from: './public/manifest.json', to: './manifest.json' },
+            {from: './public/chromeApp/background.js', to: './background.js' },
+    
+        ]),
         new HtmlWebpackPlugin({
             template: "./public/index.html",
             filename: "./index.html"
         })
       ],
     output: {
-        path: __dirname + '/dist',
+        path: __dirname + '/chromeExtensionBuild',
         publicPath: '/',
-        filename: 'bundle.js'
+        filename: 'chromeContent-bundle.js'
   },
     entry: {
-        app: './src/index.js',
+        app: './src/chromeContent.js',
      
 },
 };

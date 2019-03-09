@@ -1,0 +1,26 @@
+{
+    "manifest_version": 2,
+    "name": "Yakmos Extension",
+    "version": "0.1",
+    "description": "View comments for any url",
+    "browser_action": {
+        
+    },
+    "background": {
+    "scripts": ["/background.js"]
+    },
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+,
+     "permissions": [
+    "tabs",
+    "activeTab",
+    "<all_urls>"
+  ],
+    
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["/chromeContent-bundle.js"]
+    }
+  ]
+}
