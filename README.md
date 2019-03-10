@@ -1,18 +1,21 @@
 # Yakmos
 [Not Live Yet](https://github.com/bcwaters/yakmos)
 
-Universal comment box for any url
+#### Yakmos Chrome Extension
+A universal comment box for any url
 
 ## Stack
-Frontend built with React utilizing bootstrap
+Frontend built with React
+
 Express backend with MongoDb
 
-plans: 
+## How it works
 
-- this will be developed as a chrome extension which embeds the reactApp as an iframe
+- The chrome extension injects the Yakmos ReactApp into document.body. When the app is injected is will make a call to the Yakmos Rest Server which returns the comments for the current page.
 
-- Set up a home page which functions similiar to extension. Example: if a user wants to add yakmos comment to their url they simply provide yakmos.com/generatedLink. The generated link returns a iFrame of Url provided with comments overlayed.
-- considering going serverless  and setting up the database calls as a microservice with AWS Lamba 
+- Yakmos.com is a  home page which functions similiar to extension. Example: if a user wants to add yakmos comment to their url they simply provide yakmos.com/generatedLink. The generated link returns a Screenshot of url provided with comments overlayed.
+
+- *considering going serverless  and setting up the database calls as a microservice with AWS Lamba 
 
 ## How to run the server
 
@@ -21,4 +24,22 @@ clone the repo and run ```npm install ```
 To run the server use ``` npm run start ```
 
 note: make sure to add something to the mongoDB collection
+
+## How to run the chrome extension
+
+In chrome url bar enter: chrome://extensions
+
+Turn on developer mode on top right
+
+Press Load unpacked on top left
+
+Select the directory: path/to/localRepo/chromeExtensionBuild
+
+WARNING: due to security reasons(mixed content) this extension does not work on secure sites. Only sites without ssl work.
+Until I set up a secure endpoint you can try the extension at these sites if you are curious.
+
+[http://minusmail.com](http://minusmail.com)
+[http://devwaters.com](http://devwaters.com)
+
+
 

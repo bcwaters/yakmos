@@ -2,15 +2,15 @@ import React from 'react';
 import Comment from './Comment.js'
 import CommentBoxHeader from './CommentBoxHeader.js'
 import CommentBoxFooter from './CommentBoxFooter.js'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
+import customStyles from  '../css/yakmosContainer.module.css'
 
 const styles ={
-    commentBox:{ padding:'0px', width:'90%', position:'fixed', bottom:'0', marginLeft:'5%', zIndex:'9001'},
     commentBoxHeader:{backgroundColor:'lightgrey',borderStyle:'solid', borderWidth:'1px', borderColor:'blue', padding:'0px'} 
 }
+
+//TODO ADD INFINITE SCROLLING
+//container = the element div for commentBoxContainer
+//reached end when container.offsetHeight + container.scrollTop  == container.scrollHeight
 
 class CommentBox extends React.Component {
     state = {
@@ -19,7 +19,7 @@ class CommentBox extends React.Component {
         commentDisplay: 'none'
     };
     componentDidMount(){
-        fetch('http://localhost:8080/api/callMongo').then(
+        fetch('http://devwaters.com/api/callMongo').then(
             res => res.json()
         ).then(
             items => {
@@ -39,29 +39,19 @@ class CommentBox extends React.Component {
 
     render() {
     return (
-        <Container id='commentBox' style={styles.commentBox}>
-            <Row noGutters>
+        <div id='commentBoxContainer' className={customStyles.commentBoxContainer}>
               <CommentBoxHeader 
                     originURL={this.props.originURL}
                     expandFunction = {this.expandComments}
                     commentCount= {this.state.comments.length}
-                    
                     />
-            </Row>
-            <div id='commentContainer' 
-                style={{display:this.state.commentDisplay}}>
-            {this.state.comments.map((comment) =>
-                <Row noGutters>
-                    <Col id='comment' xs={12}>
-                    <Comment key={comment.id} text={comment.text} />
-                    </Col>
-                </Row>
-            )}
-            </div>
-            <Row noGutters>
-             <CommentBoxFooter visibility={this.state.commentDisplay}/>
-            </Row>
-        </Container>
+        
+                    {this.state.comments.map((comment) =>
+                    <Comment key={comment.id} text={comment.text} visibility={this.state.commentDisplay} />
+                    )}
+             
+                <CommentBoxFooter visibility={this.state.commentDisplay}/>
+        </div>
     );
   }
 }

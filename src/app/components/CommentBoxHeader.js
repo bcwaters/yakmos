@@ -1,20 +1,6 @@
 import React from 'react';
 import Comment from './Comment.js'
-import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
-
-const styles ={
-    commentBoxHeader:{
-        backgroundColor:'lightgrey',
-        borderStyle:'solid', 
-        minHeight:'100px',
-        },
-    yakmosWidget:{
-        background:'darkorange'
-    }
-}
-
-
+import customStyles from  '../css/yakmosContainer.module.css'
 
 class CommentBoxHeader extends React.Component {
     state = {
@@ -46,26 +32,27 @@ class CommentBoxHeader extends React.Component {
     render() {
         return(
             <React.Fragment>
-            <Col xs={10} id='commentBoxHeader' style={{
-                ...styles.commentBoxHeader, 
+            <div id='commentBoxHeader' className={customStyles.commentBoxHeader} style={{
                 visibility: this.state.expandedVisibility}}
             >
-            <h1>YAKMOS COMMENTS VIEWER</h1>
-            </Col>
-            <Col xs={2} id='yakmosWidget' style={styles.yakmosWidget}>   
-                    <div>Comment Count: {this.props.commentCount}</div>
-                    <Button     id='expandCommentsButton' 
+                <h1>YAKMOS COMMENTS VIEWER</h1>
+            </div>
+            <div  id='yakmosWidget' className={customStyles.widget}>   
+               
+                    <button     className={customStyles.expandButton}
+                                id='expandCommentsButton' 
                                 onClick={this.expandComments} 
                                 variant='outline-primary'>
-                        {this.state.expandText}
-                    </Button>
-                    <Button 
+                        {this.state.expandText}<span className={customStyles.commentCount}>{this.props.commentCount}</span>
+                    </button>
+                    <button 
+                        className={customStyles.sortButton}
                         id='sortCommentsButton'
                         style={{visibility:this.state.expandedVisibility}}
                         variant='link'>
-                        sort
-                    </Button>
-            </Col>
+                        sort comments
+                    </button>
+            </div>
             </React.Fragment>
             )
     }

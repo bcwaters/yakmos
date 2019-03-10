@@ -17,14 +17,12 @@ describe('expand comments and check visibility', function() {
         //commentbox.row.col == commentChild commentBoxFooter
         checkVisibility('#commentBoxFooter', false)
         checkVisibility('#sortCommentsButton', false)
-        checkVisibility('#commentContainer', false)
+        checkVisibility('#comment', false)
         checkVisibility('#commentBoxHeader', false)
         cy.get('#expandCommentsButton').click()
         checkVisibility('#sortCommentsButton', true)
         checkVisibility('#commentBoxHeader', true)
-        checkVisibility('#commentContainer', true)
-        checkVisibility('#commentBoxFooter', true)
-   
+        checkVisibility('#comment', true)
   })
     
 })

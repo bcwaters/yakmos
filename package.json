@@ -4,7 +4,7 @@
   "description": "yak accross the cosmos",
   "main": "index.js",
   "scripts": {
-    "buildChromeExtension":"webpack --mode production --config ./webpack-chromeExtension.config.js",
+    "buildChromeExtension": "webpack --mode production --config ./webpack-chromeExtension.config.js",
     "test": "cypress open",
     "start": "webpack --mode development && node ./server.js",
     "build": "webpack --mode production",
@@ -22,8 +22,10 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "copy-webpack-plugin": "^5.0.0",
+    "css-loader": "^2.1.1",
     "cypress": "^3.1.5",
     "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^0.23.1",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3"
   },

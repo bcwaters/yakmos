@@ -1,7 +1,5 @@
 import React from 'react';
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import customStyles from  '../css/yakmosContainer.module.css'
 
 const styles={
     commentContainer:{backgroundColor:'grey', marginBottom:'5px', borderStyle:'solid'},
@@ -13,46 +11,35 @@ const styles={
 }
 
 class Comment extends React.Component {
-  state = {
-
-  };
-
- constructor(props) {
+    state = {   
+    };
+    constructor(props) {
         super(props)
         }
-  render() {
-    const { value } = this.state;
-    return (
-            <Container style={styles.commentContainer}>
-                 <Row id='commentHeader' style={styles.commentHeader}>
-                           <Col style={styles.commentHeader}>
-                                <span >user name or id</span>
-                            </Col>
-                            <Col style={styles.commentHeader}>
-                                <span >age of comment</span>
-                            </Col>
-                </Row>
-                <Row style={styles.commentText}>
+
+    render() {
+        return (
+            <div id='comment' className={customStyles.comment} style={{display:this.props.visibility}}>
+                 <div id='commentHeader' className={customStyles.commentHeader} >
+                                <span className={customStyles.userName} >user name or id </span>
+                                <span className={customStyles.commentAge} >age of comment</span>         
+                </div>
+        
+                <div  className={customStyles.commentText}>
                     <span id='commentText' >
                         {this.props.text}
                     </span>
-                </Row>
+                </div>
         
-                <Row id='commentFooter' style={styles.commentFooter}>
-                    <Col style={styles.reply}>
-                            <span >hide link</span>
-                    </Col>
-                    <Col style={styles.reply}>
-                            <span >report link</span>
-                    </Col>
-        
-                   <Col style={styles.reply}>
-                            <span >reply link</span>
-                    </Col>
-                </Row>
-            </Container>
-    );
-  }
+                <div className={customStyles.commentFooter} 
+                        id='commentFooter' style={styles.commentFooter}>
+                            <span  className={customStyles.commentFooterLink}>reply</span>
+                            <span  className={customStyles.commentFooterLink}>hide</span>     
+                            <span  className={customStyles.commentFooterLink}>report</span>
+                </div>
+            </div>
+        );
+    }
 }
 
 

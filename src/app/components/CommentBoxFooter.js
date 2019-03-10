@@ -1,13 +1,9 @@
 import React from 'react';
 import Comment from './Comment.js'
-import Col from 'react-bootstrap/Col'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
-import Button from 'react-bootstrap/Button'
+import customStyles from  '../css/yakmosContainer.module.css'
 
-const styles ={
-    commentBoxFooter:{ borderStyle:'solid', backgroundColor:'lightcyan'}
-}
 
 //TODO Replace text area with a draft editor from draftjs
 //This will be it's own component since comments can be made from
@@ -22,10 +18,10 @@ class CommentBoxFooter extends React.Component {
 
     render() {   
         return(
-            <Col xs={12}>
-                <div id='commentBoxFooter' style={{
-                    display:this.props.visibility,
-                    ...styles.commentBoxFooter}}>
+        
+                <div className={customStyles.commentBoxFooter} id='commentBoxFooter' 
+                    style={{display:this.props.visibility}}
+                >
                 <InputGroup>
                     <FormControl as="textarea" style={{resize:'none'}} aria-label="With textarea" />
                     <InputGroup.Append>
@@ -33,7 +29,7 @@ class CommentBoxFooter extends React.Component {
                     </InputGroup.Append>
                 </InputGroup>
                 </div>
-            </Col>
+       
             )
     }
 }
