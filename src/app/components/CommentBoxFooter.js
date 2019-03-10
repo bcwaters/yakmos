@@ -1,7 +1,5 @@
 import React from 'react';
 import Comment from './Comment.js'
-import InputGroup from 'react-bootstrap/InputGroup'
-import FormControl from 'react-bootstrap/FormControl'
 import customStyles from  '../css/yakmosContainer.module.css'
 
 
@@ -13,6 +11,7 @@ class CommentBoxFooter extends React.Component {
     state = {
       
     };
+   
     componentDidMount(){     
     }
 
@@ -22,12 +21,7 @@ class CommentBoxFooter extends React.Component {
                 <div className={customStyles.commentBoxFooter} id='commentBoxFooter' 
                     style={{display:this.props.visibility}}
                 >
-                <InputGroup>
-                    <FormControl as="textarea" style={{resize:'none'}} aria-label="With textarea" />
-                    <InputGroup.Append>
-                        <InputGroup.Text>Leave Comment</InputGroup.Text>
-                    </InputGroup.Append>
-                </InputGroup>
+            
                 </div>
        
             )

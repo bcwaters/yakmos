@@ -1,7 +1,8 @@
 import React from 'react';
 import Comment from './Comment.js'
-import CommentBoxHeader from './CommentBoxHeader.js'
+import CommentBoxEditor from './CommentBoxHeader.js'
 import CommentBoxFooter from './CommentBoxFooter.js'
+import YakmosWidget from './YakmosWidget.js'
 import customStyles from  '../css/yakmosContainer.module.css'
 
 const styles ={
@@ -19,7 +20,7 @@ class CommentBox extends React.Component {
         commentDisplay: 'none'
     };
     componentDidMount(){
-        fetch('http://devwaters.com/api/callMongo').then(
+        fetch('http://localhost:8080/api/callMongo').then(
             res => res.json()
         ).then(
             items => {
@@ -40,14 +41,17 @@ class CommentBox extends React.Component {
     render() {
     return (
         <div id='commentBoxContainer' className={customStyles.commentBoxContainer}>
-              <CommentBoxHeader 
+                <YakmosWidget 
                     originURL={this.props.originURL}
                     expandFunction = {this.expandComments}
                     commentCount= {this.state.comments.length}
                     />
+              <CommentBoxEditor 
+                    visibility={this.state.commentDisplay}
+                    />
         
                     {this.state.comments.map((comment) =>
-                    <Comment key={comment.id} text={comment.text} visibility={this.state.commentDisplay} />
+                    <Comment key={comment.id} comment={comment} visibility={this.state.commentDisplay} />
                     )}
              
                 <CommentBoxFooter visibility={this.state.commentDisplay}/>

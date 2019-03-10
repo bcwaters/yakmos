@@ -1,61 +1,58 @@
 import React from 'react';
-import Comment from './Comment.js'
 import customStyles from  '../css/yakmosContainer.module.css'
+import {Editor, EditorState} from 'draft-js';
+import 'draft-js/dist/Draft.css'
 
-class CommentBoxHeader extends React.Component {
+class CommentBoxEditor extends React.Component {
     state = {
             expandedVisibility:'hidden',
             expanded: false,
-            expandText: 'view comments'
+            expandText: 'view'
     };
-    componentDidMount(){     
+    constructor(props){
+        super(props);
+         this.state = {editorState: EditorState.createEmpty()};
+            this.onChange = (editorState) => this.setState({editorState});
     }
-
-    expandComments = () => {
-         
-        if(this.state.expanded){
-                this.setState({
-                        expanded:false, 
-                        expandText: 'view comments',
-                        expandedVisibility: 'hidden'
-                    })
-        }else{
-               this.setState({
-                    expanded:true, 
-                    expandText: 'hide comments',
-                    expandedVisibility: 'visible'
-               })
-        }
-        this.props.expandFunction()
+    componentDidMount(){     
     }
 
     render() {
         return(
             <React.Fragment>
-            <div id='commentBoxHeader' className={customStyles.commentBoxHeader} style={{
-                visibility: this.state.expandedVisibility}}
+            <div    id='commentBoxHeader' 
+                    className={customStyles.commentBoxHeader} 
+                    style={{display:this.props.visibility}}
             >
-                <h1>YAKMOS COMMENTS VIEWER</h1>
+            <div className={customStyles.draftEditor}>
+                   <Editor 
+                        
+                        editorState={this.state.editorState} 
+                        onChange={this.onChange}
+                        placeholder="Leave a comment"
+                    />
             </div>
-            <div  id='yakmosWidget' className={customStyles.widget}>   
-               
-                    <button     className={customStyles.expandButton}
-                                id='expandCommentsButton' 
-                                onClick={this.expandComments} 
-                                variant='outline-primary'>
-                        {this.state.expandText}<span className={customStyles.commentCount}>{this.props.commentCount}</span>
-                    </button>
-                    <button 
-                        className={customStyles.sortButton}
-                        id='sortCommentsButton'
-                        style={{visibility:this.state.expandedVisibility}}
-                        variant='link'>
-                        sort comments
-                    </button>
+            <div className={customStyles.editorFooter}>
+              <button 
+                        className={customStyles.cancelCommentButton}
+                        id='cancelCommentButton'
+                        >
+                        cancel
+            </button>
+            
+            <button 
+                        className={customStyles.leaveCommentButton}
+                        id='leaveCommentButton'
+                        >
+                        comment
+            </button>
+           
+            </div>
+            
             </div>
             </React.Fragment>
             )
     }
 }
 
-export default CommentBoxHeader;
+export default CommentBoxEditor;

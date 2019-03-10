@@ -21,13 +21,13 @@ class Comment extends React.Component {
         return (
             <div id='comment' className={customStyles.comment} style={{display:this.props.visibility}}>
                  <div id='commentHeader' className={customStyles.commentHeader} >
-                                <span className={customStyles.userName} >user name or id </span>
-                                <span className={customStyles.commentAge} >age of comment</span>         
+                                <span className={customStyles.userName} >{this.props.comment.user} </span>
+                                <span className={customStyles.commentAge} >{this.props.comment.commentAge} ago</span>         
                 </div>
         
                 <div  className={customStyles.commentText}>
                     <span id='commentText' >
-                        {this.props.text}
+                        {this.props.comment.text}
                     </span>
                 </div>
         
