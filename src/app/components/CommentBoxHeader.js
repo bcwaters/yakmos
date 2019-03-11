@@ -2,7 +2,7 @@ import React from 'react';
 import customStyles from  '../css/yakmosContainer.module.css'
 import {Editor, EditorState, ContentState} from 'draft-js';
 import 'draft-js/dist/Draft.css'
-const apiUrl = 'https://cmq6eg51s7.execute-api.us-west-1.amazonaws.com/beta'
+const apiUrl = 'http://localhost:8083/api/addComment'
 
 class CommentBoxEditor extends React.Component {
     state = {

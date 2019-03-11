@@ -10,7 +10,7 @@ const styles ={
     commentBoxHeader:{backgroundColor:'lightgrey',borderStyle:'solid', borderWidth:'1px', borderColor:'blue', padding:'0px'} 
 }
 
-const apiUrl = 'https://cmq6eg51s7.execute-api.us-west-1.amazonaws.com/beta'
+const apiUrl = 'http://localhost:8083/api/getComments'
 
 //TODO ADD INFINITE SCROLLING
 //container = the element div for commentBoxContainer
