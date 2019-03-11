@@ -20,6 +20,7 @@ module.exports = {
         new CopyPlugin([
             {from: './public/manifest.json', to: './manifest.json' },
             {from: './public/chromeApp/background.js', to: './background.js' },
+            {from: './public/chromeApp/directions.txt', to: './directions.txt' },
             {from: './public/Draft.css', to: './Draft.css' },
         ]),
         new HtmlWebpackPlugin({

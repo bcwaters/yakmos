@@ -1,0 +1,11 @@
+### First  
+- In chrome url bar enter: chrome://extensions
+
+- Turn on developer mode on top right
+
+- Press Load unpacked on top left and select the unzipped directory: chromeExtensionBuild
+
+### Second
+
+- Navigate to a website and then click the extension to display comments
+

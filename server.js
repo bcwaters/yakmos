@@ -19,6 +19,10 @@ router.get('/', (req, res) => {
   res.sendFile(path.join(__dirname,'index.html'));
 })
 
+app.get('/download/extension', function(req, res){
+  var file =  './chromeExtensionBuild.zip';
+  res.download(file); // Set disposition and send it.
+});
 
 router.get('/api/getComments', (req, res) => {
     //call DB and send data
