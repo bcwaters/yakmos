@@ -26,18 +26,25 @@ To run the server use ``` npm run start ```
 note: make sure to add something to the mongoDB collection
 
 ## How to run the chrome extension
+### First
+- unzip chromeExtensionBuild.zip from this repo
 
-unzip chromeExtensionBuild.zip from this repo
+- you can also download the zip directly from here:
 
-In chrome url bar enter: chrome://extensions
+[http://devwaters.com/download/universalCommentExtension.zip](http://devwaters.com/download/universalCommentExtension.zip)
 
-Turn on developer mode on top right
+### Second  
+- In chrome url bar enter: chrome://extensions
 
-Press Load unpacked on top left
+- Turn on developer mode on top right
 
-select the unzipped directory: chromeExtensionBuild
+- Press Load unpacked on top left and select the unzipped directory: chromeExtensionBuild
 
-you can try the extension at these sites if you are curious.
+### Third
+
+- Navigate to a website and then click the extension to display comments
+
+- you can try the extension at any site but here are a few urls.
 
 [http://minusmail.com](http://minusmail.com)
 
