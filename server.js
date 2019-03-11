@@ -4,12 +4,20 @@ const MongoDB =  require('./MongoDB.js')
 //const bodyParser = require('body-parser')
 const app = express()
 app.use(express.json())
- 
+const cors = require('cors')
+
 const port = process.env.PORT || 8083;
 const router = express.Router()
-
+//app.use(cors())
 MongoDB.setTestCollection();
 
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+	console.log('middleware set cors policy to allow ')
+    next();
+}
 
 //set up dist as static folder
 router.use('/', express.static(path.join(__dirname, 'dist')));
@@ -25,7 +33,8 @@ app.get('/download/extension', function(req, res){
 });
 
 router.get('/api/getComments', (req, res) => {
-    //call DB and send data
+    //call DB and send datia
+	console.log(res.header)
     MongoDB.getComments('somewhere.com', (result)=>{res.json(result)})
 })
 
@@ -41,13 +50,12 @@ router.get('/api/getComments', (req, res) => {
 */
 router.post('/api/addComment', (req, res) => {
    
-    //req.on('data', function(data) {
+       //req.on('data', function(data) {
        MongoDB.insertComment(req.body, 'comments')
         //console.log(req.body)
          res.end();
    // }) 
 })
-
 
 app.use(router)
 //Start server

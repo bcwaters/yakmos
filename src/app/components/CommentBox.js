@@ -10,7 +10,7 @@ const styles ={
     commentBoxHeader:{backgroundColor:'lightgrey',borderStyle:'solid', borderWidth:'1px', borderColor:'blue', padding:'0px'} 
 }
 
-const apiUrl = 'http://localhost:8083/api/getComments'
+const apiUrl = 'http://yakmos.com/api/getComments'
 
 //TODO ADD INFINITE SCROLLING
 //container = the element div for commentBoxContainer
