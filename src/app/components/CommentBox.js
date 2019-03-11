@@ -10,6 +10,8 @@ const styles ={
     commentBoxHeader:{backgroundColor:'lightgrey',borderStyle:'solid', borderWidth:'1px', borderColor:'blue', padding:'0px'} 
 }
 
+const apiUrl = 'https://cmq6eg51s7.execute-api.us-west-1.amazonaws.com/beta'
+
 //TODO ADD INFINITE SCROLLING
 //container = the element div for commentBoxContainer
 //reached end when container.offsetHeight + container.scrollTop  == container.scrollHeight
@@ -22,7 +24,7 @@ class CommentBox extends React.Component {
         commentDisplay: 'none'
     };
     componentDidMount(){
-        fetch('http://localhost:8080/api/callMongo').then(
+        fetch(apiUrl).then(
             res => res.json()
         ).then(
             items => {

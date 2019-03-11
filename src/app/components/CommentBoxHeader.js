@@ -2,6 +2,7 @@ import React from 'react';
 import customStyles from  '../css/yakmosContainer.module.css'
 import {Editor, EditorState, ContentState} from 'draft-js';
 import 'draft-js/dist/Draft.css'
+const apiUrl = 'https://cmq6eg51s7.execute-api.us-west-1.amazonaws.com/beta'
 
 class CommentBoxEditor extends React.Component {
     state = {
@@ -21,7 +22,7 @@ class CommentBoxEditor extends React.Component {
     
     insertComment = (commentObject) => {
         //send comment to rest endpoint
-            fetch('http://localhost:8080/api/addComment', {
+            fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

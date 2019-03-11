@@ -13,7 +13,7 @@ Express backend with MongoDb
 
 - The chrome extension injects the Yakmos ReactApp into document.body. When the app is injected is will make a call to the Yakmos Rest Server which returns the comments for the current page.
 
-- Yakmos.com is a  home page which functions similiar to extension. Example: if a user wants to add yakmos comment to their url they simply provide yakmos.com/generatedLink. The generated link returns a Screenshot of url provided with comments overlayed.
+- Yakmos.com will be a home page which functions similiar to extension. Example: if a user wants to add yakmos comment to their url they simply provide yakmos.com/generatedLink. The generated link returns a Screenshot of url provided with comments overlayed.
 
 - *considering going serverless  and setting up the database calls as a microservice with AWS Lamba 
 
@@ -35,10 +35,10 @@ Press Load unpacked on top left
 
 Select the directory: path/to/localRepo/chromeExtensionBuild
 
-WARNING: due to security reasons(mixed content) this extension does not work on secure sites. Only sites without ssl work.
-Until I set up a secure endpoint you can try the extension at these sites if you are curious.
+you can try the extension at these sites if you are curious.
 
 [http://minusmail.com](http://minusmail.com)
+
 [http://devwaters.com](http://devwaters.com)
 
 

@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 })
 
 
-router.get('/api/callMongo', (req, res) => {
+router.get('/api/getComments', (req, res) => {
     //call DB and send data
     MongoDB.getComments('somewhere.com', (result)=>{res.json(result)})
 })
@@ -41,11 +41,7 @@ router.post('/api/addComment', (req, res) => {
        MongoDB.insertComment(req.body, 'comments')
         //console.log(req.body)
          res.end();
-   // })
-    
-   
-    
-   
+   // }) 
 })
 
 

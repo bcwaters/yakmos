@@ -33,7 +33,6 @@
     display:grid;
     background-color: antiquewhite;
     border-bottom: 3px solid black;
-    
    
 }
 
@@ -46,7 +45,6 @@
     grid-column: 1 / 5;
     background: lightgreen;
  
-     
 }
 
 .widgetTitle{
