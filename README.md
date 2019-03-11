@@ -27,13 +27,15 @@ note: make sure to add something to the mongoDB collection
 
 ## How to run the chrome extension
 
+unzip chromeExtensionBuild.zip from this repo
+
 In chrome url bar enter: chrome://extensions
 
 Turn on developer mode on top right
 
 Press Load unpacked on top left
 
-Select the directory: path/to/localRepo/chromeExtensionBuild
+select the unzipped directory: chromeExtensionBuild
 
 you can try the extension at these sites if you are curious.
 
