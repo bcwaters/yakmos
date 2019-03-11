@@ -1,20 +1,43 @@
 import React from 'react';
 import customStyles from  '../css/yakmosContainer.module.css'
-import {Editor, EditorState} from 'draft-js';
+import {Editor, EditorState, ContentState} from 'draft-js';
 import 'draft-js/dist/Draft.css'
 
 class CommentBoxEditor extends React.Component {
     state = {
-            expandedVisibility:'hidden',
-            expanded: false,
-            expandText: 'view'
     };
     constructor(props){
         super(props);
-         this.state = {editorState: EditorState.createEmpty()};
-            this.onChange = (editorState) => this.setState({editorState});
+        this.state = {editorState: EditorState.createEmpty()};
+        this.onChange = (editorState) => this.setState({editorState});
     }
     componentDidMount(){     
+    }
+
+    clearEditor = () => {
+        const editorState = EditorState.push(this.state.editorState, ContentState.createFromText(''));
+        this.setState({ editorState });
+    }
+    
+    insertComment = (commentObject) => {
+        //send comment to rest endpoint
+            fetch('http://localhost:8080/api/addComment', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(commentObject)
+            }).then(this.clearEditor(), this.props.addComment(commentObject))
+    }
+    
+    makeComment = () => {
+        let currentTime = new Date().getTime();
+        return {
+                    user: 'anonUser',
+                    text: this.state.editorState.getCurrentContent().getPlainText(),
+                    commentAge: currentTime
+                }
     }
 
     render() {
@@ -22,11 +45,10 @@ class CommentBoxEditor extends React.Component {
             <React.Fragment>
             <div    id='commentBoxHeader' 
                     className={customStyles.commentBoxHeader} 
-                    style={{display:this.props.visibility}}
+                    
             >
-            <div className={customStyles.draftEditor}>
+            <div id='draftEditor' className={customStyles.draftEditor}>
                    <Editor 
-                        
                         editorState={this.state.editorState} 
                         onChange={this.onChange}
                         placeholder="Leave a comment"
@@ -36,6 +58,7 @@ class CommentBoxEditor extends React.Component {
               <button 
                         className={customStyles.cancelCommentButton}
                         id='cancelCommentButton'
+                        onClick={this.clearEditor}
                         >
                         cancel
             </button>
@@ -43,6 +66,7 @@ class CommentBoxEditor extends React.Component {
             <button 
                         className={customStyles.leaveCommentButton}
                         id='leaveCommentButton'
+                        onClick={( ) => {this.insertComment(this.makeComment())}}
                         >
                         comment
             </button>

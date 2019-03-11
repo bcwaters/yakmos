@@ -17,13 +17,13 @@ class MongoDB{
         });
     }
     
-    static insertComment(commentObject){
+    static insertComment(commentObject, originURL){
         MongoClient.connect(url, function(err, db) {
             if (err) {
                 console.log('error connecting') 
                 throw err;};
             var dbo = db.db(dbName);
-            dbo.collection(testCollection).insertOne(commentObject, function(err, res) {
+            dbo.collection(originURL).insertOne(commentObject, function(err, res) {
             if (err) {
                 console.log('error inserting')
                 throw err;
@@ -71,21 +71,28 @@ class MongoDB{
     }
     
     static insertTestCollections(){
+        
+        
          MongoDB.insertComment({
                 text: 'This is a comment that has been inserted into the mongoDB. it was the first comment to be inserted.',
                 user: 'frank',
-                commentAge: '5 hours'
-        })
+                commentAge: '1550000000000'
+        }, testCollection)
         MongoDB.insertComment({
                 text: 'not gonna say much',
                 user: 'larry',
-                commentAge: '8 days'
-        })
+                commentAge: '1552240000000'
+        }, testCollection)
+        MongoDB.insertComment({
+                text: 'not gonna say much again',
+                user: 'larry',
+                commentAge: '1550550000000'
+        }, testCollection)
         MongoDB.insertComment({
                 text: 'I woould lik to share a wall of text with you. So plase continue reading this text. otherwise i suppose you can stop reading it and move on to the next comment. but last time i check di was the last one to comment. so anyways i forgot what i wante dto say but it seems like this comment is long enough to test out the scenario of long comments',
                 user: 'anon56798',
-                commentAge: '9 months'
-        })
+                commentAge: '1552241000000'
+        }, testCollection)
     }
 }
 

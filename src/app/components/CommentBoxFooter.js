@@ -17,13 +17,12 @@ class CommentBoxFooter extends React.Component {
 
     render() {   
         return(
-        
-                <div className={customStyles.commentBoxFooter} id='commentBoxFooter' 
-                    style={{display:this.props.visibility}}
-                >
-            
+                <div className={customStyles.commentBoxFooter} id='commentBoxFooter' >
+                    <div className={customStyles.bugLink}>report a bug</div> 
+                    <div className={customStyles.contactLink}>contact</div>
+                    <div className={customStyles.donateLink}> donate </div> 
+                    <div className={customStyles.loginLink}>login</div>
                 </div>
-       
             )
     }
 }

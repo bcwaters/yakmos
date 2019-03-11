@@ -1,5 +1,6 @@
 import React from 'react';
 import customStyles from  '../css/yakmosContainer.module.css'
+import sortCommentOptions from '../utils/sortCommentOptions.js'
 
 class YakmosWidget extends React.Component {
     state = {
@@ -49,7 +50,7 @@ class YakmosWidget extends React.Component {
                                 onClick={this.expandComments} 
                                >
                         {this.state.expandText}
-                        <span   className={customStyles.commentCount} 
+                        <span   className={customStyles.commentCount} id='commentCountBadge'
                                 style={{display:this.state.countExpandedVisibility}}>
                             {this.props.commentCount}
                         </span>
@@ -58,8 +59,18 @@ class YakmosWidget extends React.Component {
                         className={customStyles.sortButton}
                         id='sortCommentsButton'
                         style={{display:this.state.sortExpandedVisibility}}
+                        onClick={() => this.props.sortComments(sortCommentOptions.newest)}
                         >
-                        sort
+                        sort by
+                    </button>
+
+                    <button 
+                        className={customStyles.filterCommentsButton}
+                        id='filterCommentsButton'
+                        style={{display:this.state.sortExpandedVisibility}}
+                     
+                        >
+                        filter
                     </button>
                    
             </div>

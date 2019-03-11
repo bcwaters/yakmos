@@ -4,6 +4,7 @@ import CommentBoxEditor from './CommentBoxHeader.js'
 import CommentBoxFooter from './CommentBoxFooter.js'
 import YakmosWidget from './YakmosWidget.js'
 import customStyles from  '../css/yakmosContainer.module.css'
+import sortCommentOptions from '../utils/sortCommentOptions.js'
 
 const styles ={
     commentBoxHeader:{backgroundColor:'lightgrey',borderStyle:'solid', borderWidth:'1px', borderColor:'blue', padding:'0px'} 
@@ -15,6 +16,7 @@ const styles ={
 
 class CommentBox extends React.Component {
     state = {
+        sortPref : sortCommentOptions.oldest,
         comments : [],
         expanded : true,
         commentDisplay: 'none'
@@ -24,6 +26,7 @@ class CommentBox extends React.Component {
             res => res.json()
         ).then(
             items => {
+                items = items.sort(sortCommentOptions.oldest)
                 this.setState( {comments : items})
             })
     }
@@ -32,10 +35,23 @@ class CommentBox extends React.Component {
     expandComments = () => {
         this.setState({expanded: !this.state.expanded})
         if(this.state.expanded){
-            this.setState({commentDisplay:'inherit'})
+            this.setState({commentDisplay:'grid'})
         }else{
             this.setState({commentDisplay:'none'})
         }
+    }
+    
+    addComment = (commentObject) => {
+         this.setState( (prevState,props) => (
+             {comments : [commentObject, ...prevState.comments]}
+         ));
+    }
+    
+    sortComments = (sortFunction) => {
+        let sorted = this.state.comments.sort(sortFunction)
+        this.setState({comments: sorted})
+           
+        
     }
 
     render() {
@@ -45,9 +61,11 @@ class CommentBox extends React.Component {
                     originURL={this.props.originURL}
                     expandFunction = {this.expandComments}
                     commentCount= {this.state.comments.length}
+                    sortComments = {this.sortComments}
                     />
-              <CommentBoxEditor 
+                <CommentBoxEditor 
                     visibility={this.state.commentDisplay}
+                    addComment={this.addComment}
                     />
         
                     {this.state.comments.map((comment) =>

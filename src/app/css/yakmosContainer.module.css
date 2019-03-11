@@ -6,6 +6,7 @@
 }
 
 .commentBoxContainer {
+    min-height:175px;
     max-height:50vh;
     display: grid;
     grid-template-columns: auto auto auto auto;
@@ -16,6 +17,9 @@
     margin-left: 25%;
     z-index: 9001;
     overflow-y: scroll;
+    border-left: solid black 2px;
+    border-right: solid black 2px;
+    background: white;
 }
 
 ::-webkit-scrollbar { 
@@ -27,18 +31,20 @@
     grid-column: 1 / 5;
     grid-template-columns: 2fr 1fr 1fr 1fr;
     display:grid;
-    background-color: white;
-    border-style: solid;
+    background-color: antiquewhite;
+    border-bottom: 3px solid black;
+    
    
 }
 
 .yakmosWidget {
+    position: sticky;
+    top:0;
     display:grid;
     grid-template-columns: 3fr 1fr 1fr 1fr;
     grid-row: 1;
     grid-column: 1 / 5;
     background: lightgreen;
-    border-style: solid;
  
      
 }
@@ -55,58 +61,56 @@
     display:grid;
     grid-template-columns: auto auto auto auto;
     grid-column: 1 / 5;
-    background: white;
-    border-style: solid;
+    background-color:beige;
+  
 }
 
 .commentHeader{
-    display:grid;
-    grid-template-columns: 1fr 1fr 3fr;
+    display:flex;
+    grid-template-columns: 1fr 1fr 5fr;
     grid-column: 1 / 5;
-    border-style: solid;
-    border-width: 1px;
-    border-color: purple;
+
 }
 
 .commentText{
+    max-width: 95%;
+    padding-left:15px;
+    padding-right:15px;
     grid-column: 1 / 5;
-    border-style: solid;
-    border-width: 1px;
-    border-color: yellow;
-    min-height:50px;
+    word-wrap:break-word;
+   
+}
+
+.commentTextSpan{
+    max-width: 95%;
+    word-wrap:break-word;
+   
 }
 
 .commentFooter{
     grid-column: 1 / 5;
-    border-style: solid;
-    border-width: 1px;
-    border-color: purple;
+    border-bottom: solid 1px black;
+    display: flex;
+    justify-content: flex-end;
     
 }
 
 .commentFooterLink{
     grid-column:2/3;
-    border-style: solid;
-    border-width: 1px;
-    border-color: blue;
     color: blue;
     margin-right:10px;
 }
 
 .userName{
-    background-color: cadetblue;
+    margin-left:5px;
+    font-weight:bold;
     grid-column:1/2;
-    border-style: solid;
-    border-width: 1px;
-    border-color: yellow;
 }
 
 .commentAge{
-    background-color: red;
+    color:grey;
     grid-column:2/3;
-    border-style: solid;
-    border-width: 1px;
-    border-color: yellow;
+    margin-left:5px;
 }
 
 .expandButton{
@@ -127,6 +131,7 @@
     margin-top:5px;
     margin-right:5px;
     margin-left:5px;
+
 }
 .sortButton{
     background-color: skyblue;
@@ -143,6 +148,7 @@
     margin-top:5px;
     margin-right:5px;
     margin-left:5px;
+   
 }
 
 .editorFooter{
@@ -153,6 +159,7 @@
     height: 30px;
     border-top: 1px solid grey;
     margin-left:5px;
+    padding-bottom:10px;
 
 }
 
@@ -165,9 +172,8 @@
     display: inline-block;
     font-size: 16px;
     cursor: pointer;
-   
     height: 25px;
-    margin-top:5px;
+    margin-bottom:5px;
     margin-right:5px;
     margin-left:5px;
     border: solid blue 1px;
@@ -184,14 +190,14 @@
     display: inline-block;
     font-size: 16px;
     cursor: pointer;
-   
     height: 25px;
-    margin-top:5px;
+    margin-bottom:5px;
     margin-right:5px;
     margin-left:5px;
     border: solid black 1px;
     grid-column: 4/5;
     grid-row: 1;
+    
 
 }
 
@@ -206,15 +212,59 @@
     padding: 3px;
     border-radius: 25px;
     position: relative;
-    top: -5px;
+    
     
 }
 
+.filterCommentsButton{
+    background-color: mediumpurple;
+    border: solid blue 1px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: auto;
+    font-size: 16px;
+    cursor: pointer;
+    grid-column:2/3;
+    grid-row: 1;
+    margin-top:5px;
+    margin-right:5px;
+    margin-left:5px;
+}
 
 .commentBoxFooter {
-    grid-column: 1 / 5;
-    border-style: solid;
+    display:grid;
+    grid-template-columns: auto auto auto auto;
     background: lightcyan;
+    position: sticky;
+    grid-column: 1 /5;
+    bottom: 0;
+    margin-top:5px;
+}
+
+.loginLink{
+    text-align: center;
+    color:blue;
+    margin-left: 10px;
+}
+
+.contactLink{
+    text-align: center;
+    color:blue;
+    margin-left: 10px;
+}
+
+.donateLink{
+    text-align: center;
+    color:blue;
+    margin-left: 10px;
+}
+
+.bugLink{
+    text-align: center;
+    color:blue;
+    margin-left: 10px;
 }
 
 
