@@ -56,10 +56,12 @@
 }
 
 .comment {
+    padding:10px;
     display:grid;
     grid-template-columns: auto auto auto auto;
     grid-column: 1 / 5;
     background-color:beige;
+    
   
 }
 
@@ -87,9 +89,9 @@
 
 .commentFooter{
     grid-column: 1 / 5;
-    border-bottom: solid 1px black;
+  
     display: flex;
-    justify-content: flex-end;
+    
     
 }
 
@@ -97,6 +99,8 @@
     grid-column:2/3;
     color: blue;
     margin-right:10px;
+    cursor: pointer;
+    margin-left:10px;
 }
 
 .userName{
@@ -147,6 +151,14 @@
     margin-right:5px;
     margin-left:5px;
    
+}
+
+.commentReplies{
+    font-weight:bold;
+    cursor: pointer;
+    padding-top:5px;
+    padding-left:25px;
+    
 }
 
 .editorFooter{
@@ -229,6 +241,13 @@
     margin-top:5px;
     margin-right:5px;
     margin-left:5px;
+}
+
+.repliesContainter{
+    margin-left:25px;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    
 }
 
 .commentBoxFooter {
