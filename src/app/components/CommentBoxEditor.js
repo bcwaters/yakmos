@@ -1,8 +1,8 @@
 import React from 'react';
 import customStyles from  '../css/yakmosContainer.module.css'
 import {Editor, EditorState, ContentState} from 'draft-js';
+import Api from '../utils/ApiCalls.js'
 import 'draft-js/dist/Draft.css'
-const apiUrl = 'http://localhost:8083/api/addComment'
 
 class CommentBoxEditor extends React.Component {
     state = {
@@ -22,14 +22,9 @@ class CommentBoxEditor extends React.Component {
     
     insertComment = (commentObject) => {
         //send comment to rest endpoint
-            fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(commentObject)
-            }).then(this.clearEditor(), this.props.addComment(commentObject))
+         Api.insertComment(this.props.collectionName, commentObject, () =>{
+              this.clearEditor(), this.props.addComment(commentObject)
+         })
     }
     
     makeComment = () => {
@@ -38,9 +33,17 @@ class CommentBoxEditor extends React.Component {
                     user: 'anonUser',
                     text: this.state.editorState.getCurrentContent().getPlainText(),
                     commentAge: currentTime,
-                    children: [],
                     parentID: 'root'
                 }
+    }
+    
+    focus(){
+        //TODO move this logic to the extension content script.... maybe send a message on focus
+        //to to the extension
+        this.props.removeHotKeys()
+        document.activeElement.blur()
+        this.refs.editor.focus()
+        console.log('focus set: ' + this.refs.editor)
     }
 
     render() {
@@ -50,11 +53,13 @@ class CommentBoxEditor extends React.Component {
                     className={customStyles.commentBoxHeader} 
                     
             >
-            <div id='draftEditor' className={customStyles.draftEditor}>
+            <div id='draftEditor' className={customStyles.draftEditor} 
+                                    onClick={this.focus.bind(this)}>
                    <Editor 
                         editorState={this.state.editorState} 
                         onChange={this.onChange}
                         placeholder="Leave a comment"
+                        ref='editor'
                     />
             </div>
             <div className={customStyles.editorFooter}>

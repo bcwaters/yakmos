@@ -6,32 +6,59 @@ import AppHeader from './AppHeader.js'
 import CommentSection from './CommentSection.js'
 import customStyles from  '../css/yakmosContainer.module.css'
 import sortCommentOptions from '../utils/sortCommentOptions.js'
-
+import Api from '../utils/ApiCalls.js'
 const styles ={
     commentBoxHeader:{backgroundColor:'lightgrey',borderStyle:'solid', borderWidth:'1px', borderColor:'blue', padding:'0px'} 
 }
-
-const apiUrl = 'http://localhost:8083/api/getComments'
 
 //TODO ADD INFINITE SCROLLING
 //container = the element div for AppContainer
 //reached end when container.offsetHeight + container.scrollTop  == container.scrollHeight
 
+
+
 class AppContainer extends React.Component {
+    //note: Collection name corresponds to the Current URL the user is on
     state = {
         sortPref : sortCommentOptions.oldest,
         comments : [],
         expanded : true,
-        commentDisplay: 'none'
+        commentDisplay: 'none',
+        collectionName: 'comments'
     };
     componentDidMount(){
-        fetch(apiUrl).then(
-            res => res.json()
-        ).then(
-            items => {
-                items = items.sort(sortCommentOptions.oldest)
-                this.setState( {comments : items})
-            })
+        this.removeYoutubeHotkeys()
+        
+        Api.getCommentsCollection(this.state.collectionName,
+                (commentsFound)=>{ 
+                    commentsFound.sort(sortCommentOptions.oldest)  
+                    this.setState( {comments : commentsFound})
+               }
+        )
+     
+    }
+
+    updateCollectionName = (updatedName) =>{
+        this.setState({collectionName: updatedName})
+    }
+
+    //this logic probably belongs in the content script for the extension
+    //so that the hotkeys can be added back to the document
+    removeYoutubeHotkeys = () =>{
+        
+        var x = document.getElementsByTagName('yt-Hotkey-Manager')[0]
+        if(x){
+             var clone = x.cloneNode(false)
+            var parent = x.parentNode
+            console.log(parent)
+            x.parentNode.replaceChild(clone,x)
+            console.log(parent)
+            clone.parentNode.removeChild(clone)
+            console.log('removed hotkeys')
+            console.log(x);
+            console.log(parent)
+            
+        }
     }
 
     //make the comments visible
@@ -63,13 +90,17 @@ class AppContainer extends React.Component {
                     expandFunction = {this.expandComments}
                     commentCount= {this.state.comments.length}
                     sortComments = {this.sortComments}
+                    updateCollectionName = {this.updateCollectionName}
                     />
                 <CommentBoxEditor 
+                    removeHotKeys={()=>{this.removeYoutubeHotkeys()}}
                     addComment={this.addComment}
+                    collectionName={this.state.collectionName}
                     />
                 <CommentSection 
                     comments={this.state.comments} 
                     commentDisplay={this.state.commentDisplay} 
+                    collectionName={this.state.collectionName}
                     />
                  
                 <AppFooter 

@@ -61,6 +61,7 @@ class Comment extends React.Component {
                     removeEditor={this.removeReplyEditor}
                     addToReplyChain={this.appendReply}
                     parentID = {this.props.comment._id}
+                    collectionName={this.props.collectionName}
                 />
                        })
      }

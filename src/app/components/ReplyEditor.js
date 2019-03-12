@@ -1,8 +1,9 @@
 import React from 'react';
 import customStyles from  '../css/yakmosContainer.module.css'
 import {Editor, EditorState, ContentState} from 'draft-js';
+import Api from '../utils/ApiCalls.js'
 import 'draft-js/dist/Draft.css'
-const apiUrl = 'http://localhost:8083/api/addComment'
+
 
 class ReplyEditor extends React.Component {
     state = {
@@ -22,14 +23,10 @@ class ReplyEditor extends React.Component {
     
     insertComment = (commentObject) => {
         //send comment to rest endpoint
-            fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(commentObject)
-            }).then( this.props.addToReplyChain(commentObject),this.props.removeEditor())
+        Api.insertComment(this.props.collectionName, commentObject, ()=>{
+                this.props.addToReplyChain(commentObject)
+                this.props.removeEditor()
+         })
     }
     
     //TODO CHANGE THIS

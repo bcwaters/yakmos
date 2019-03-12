@@ -25,9 +25,18 @@ class CommentSection extends React.Component {
         return (
             <div className={customStyles.commentSection} id='commentSection'>
              
-                {this.props.comments.filter(comment => {return comment.parentID == 'root'}).map((comment, index, filteredComments) =>
-                    <Comment key={comment._id} comment={comment} visibility={this.props.commentDisplay} comments={this.props.comments}/>
-                )}       
+                {this.props.comments.filter(comment => {
+                        return comment.parentID == 'root'
+                        }).map((comment, index, filteredComments) =>
+                            <Comment 
+                                key={comment._id} 
+                                comment={comment} 
+                                visibility={this.props.commentDisplay} 
+                                comments={this.props.comments}
+                                collectionName={this.props.collectionName}
+                            />
+                            )
+                }       
             </div>
 
             

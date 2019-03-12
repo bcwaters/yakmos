@@ -68,7 +68,7 @@ class AppHeader extends React.Component {
                         className={customStyles.filterCommentsButton}
                         id='filterCommentsButton'
                         style={{display:this.state.sortExpandedVisibility}}
-                     
+                        onClick={()=>{this.props.updateCollectionName('comments2')}}
                         >
                         filter
                     </button>

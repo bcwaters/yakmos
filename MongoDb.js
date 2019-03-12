@@ -1,7 +1,8 @@
 var MongoClient = require('mongodb').MongoClient;
 const url = "mongodb://localhost:27017/";
 const dbName = "yakmos"
-let testCollection = 'comments'
+const testCollection = 'comments'
+const testCollection2 = 'comments2'
 
 class MongoDB{
     
@@ -17,60 +18,60 @@ class MongoDB{
         });
     }
     
-    static insertComment(commentObject, originURL){
+    static insertComment(commentObject, collectionName){
         MongoClient.connect(url, function(err, db) {
             if (err) {
                 console.log('error connecting') 
                 throw err;};
             var dbo = db.db(dbName);
-            dbo.collection(originURL).insertOne(commentObject, function(err, res) {
+            dbo.collection(collectionName).insertOne(commentObject, function(err, res) {
             if (err) {
                 console.log('error inserting')
                 throw err;
             };
-            console.log("1 document inserted");
+            console.log("1 document inserted into: " + collectionName);
             db.close();
             });
         });
     }
     
   
-    static getComments(originUrl, callback){
+    static getComments(collectionName, callback){
         MongoClient.connect(url, function(err, db) {
             if (err) throw err;
             var dbo = db.db(dbName);
-            var query = { originUrl: originUrl };
-            dbo.collection(testCollection).find({}).toArray(function(err, result) {
+           
+            dbo.collection(collectionName).find({}).toArray(function(err, result) {
             if (err) throw err;
-            console.log('retrieved comments for:' + originUrl + ' #: ' + result.length);
+            console.log('retrieved comments for:' + collectionName + ' #: ' + result.length);
             callback(result);
             db.close();
             });
         });
     }
     
-    static getCommentByID(originUrl, ID ,callback){
+    static getCommentByID(collectionName, ID ,callback){
         MongoClient.connect(url, function(err, db) {
             if (err) throw err;
             var dbo = db.db(dbName);
-            var query = { originUrl: originUrl };
-            dbo.collection(testCollection).find({ _id: { $eq: ID } } ).toArray(function(err, result) {
+           
+            dbo.collection(collectionName).find({ _id: { $eq: ID } } ).toArray(function(err, result) {
             if (err) throw err;
-            console.log('retrieved comments for:' + originUrl + ' #: ' + result.length);
+            console.log('retrieved comments for:' + collectionName + ' #: ' + result.length);
             callback(result);
             db.close();
             });
         });
     }
     
-    static updateCommentByID(originUrl, ID ,callback){
+    static updateCommentByID(collectionName, ID ,callback){
         MongoClient.connect(url, function(err, db) {
             if (err) throw err;
             var dbo = db.db(dbName);
-            var query = { originUrl: originUrl };
+           
             dbo.collection(testCollection).find({ _id: { $eq: ID } } ).toArray(function(err, result) {
             if (err) throw err;
-            console.log('retrieved comments for:' + originUrl + ' #: ' + result.length);
+            console.log('retrieved comments for:' + collectionName + ' #: ' + result.length);
             callback(result);
             db.close();
             });
@@ -93,6 +94,9 @@ class MongoDB{
           
     }
     static setTestCollection(){
+         MongoDB.createCollection(testCollection);
+          MongoDB.createCollection(testCollection2);
+        MongoDB.dropCollection(testCollection2, function(){console.log('deelted c2')});
         MongoDB.dropCollection(testCollection, this.insertTestCollections);
        
        
@@ -101,7 +105,7 @@ class MongoDB{
     static insertTestCollections(){
         
          MongoDB.insertComment({
-                _id: 500,
+               
                 text: 'This is a comment that has been inserted into the mongoDB. it was the first comment to be inserted.',
                 user: 'frank',
                 commentAge: '1550000000000',
@@ -134,6 +138,22 @@ class MongoDB{
     
         }, testCollection)
         
+        
+        MongoDB.insertComment({
+             
+                text: 'the other test collectoin.',
+                user: 'frank',
+                commentAge: '1550000000000',
+                parentID: 'root',
+      
+        }, testCollection2)
+        MongoDB.insertComment({
+                text: 'this is test collection 2',
+                user: 'larry',
+                commentAge: '1552240000000',
+                parentID: 'root',
+         
+        }, testCollection2)
        
     }
 }

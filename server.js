@@ -25,9 +25,11 @@ app.get('/download/extension', function(req, res){
   res.download(file); // Set disposition and send it.
 });
 
-router.get('/api/getComments', (req, res) => {
+//TODO write a proper regular expression in the form of /api/getComments/{collectionName}
+router.get('/api/getComments/*', (req, res) => {
     //call DB and send data
-    MongoDB.getComments('somewhere.com', (result)=>{res.json(result)})
+    var collectionName = req.url.split('/').pop();
+    MongoDB.getComments(collectionName, (result)=>{res.json(result)})
 })
 
 
@@ -40,11 +42,11 @@ router.get('/api/getComments', (req, res) => {
 *       MongoDB.insertComment(post.data.originUrl, post.data.comment)  //url is collectionName
 *
 */
+
 router.post('/api/addComment', (req, res) => {
-    //req.on('data', function(data) {
-       MongoDB.insertComment(req.body, 'comments')
-        //console.log(req.body)
-         res.end();
+       MongoDB.insertComment(req.body.commentObject, req.body.collectionName)
+        //Probably need to add error hhandling here by passing res.end into a cb
+        res.end();
    // }) 
 })
 
