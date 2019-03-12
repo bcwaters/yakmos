@@ -2,9 +2,9 @@ import React from 'react';
 import customStyles from  '../css/yakmosContainer.module.css'
 import {Editor, EditorState, ContentState} from 'draft-js';
 import 'draft-js/dist/Draft.css'
-const apiUrl = 'http://yakmos.com/api/addComment'
+const apiUrl = 'https://cmq6eg51s7.execute-api.us-west-1.amazonaws.com/beta'
 
-class CommentBoxEditor extends React.Component {
+class ReplyEditor extends React.Component {
     state = {
     };
     constructor(props){
@@ -29,25 +29,28 @@ class CommentBoxEditor extends React.Component {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(commentObject)
-            }).then(this.clearEditor(), this.props.addComment(commentObject))
+            }).then( this.props.addToReplyChain(commentObject),this.props.removeEditor())
     }
     
+    //TODO CHANGE THIS
     makeComment = () => {
         let currentTime = new Date().getTime();
         return {
                     user: 'anonUser',
                     text: this.state.editorState.getCurrentContent().getPlainText(),
-                    commentAge: currentTime
+                    commentAge: currentTime,
+                    parentID: this.props.parentID
                 }
     }
 
     render() {
         return(
             <React.Fragment>
-            <div    id='commentBoxHeader' 
+            <div    id='ReplyEditor' 
                     className={customStyles.commentBoxHeader} 
                     
             >
+            <div>enter your reply below</div>
             <div id='draftEditor' className={customStyles.draftEditor}>
                    <Editor 
                         editorState={this.state.editorState} 
@@ -59,7 +62,7 @@ class CommentBoxEditor extends React.Component {
               <button 
                         className={customStyles.cancelCommentButton}
                         id='cancelCommentButton'
-                        onClick={this.clearEditor}
+                        onClick={this.props.removeEditor}
                         >
                         cancel
             </button>
@@ -80,4 +83,4 @@ class CommentBoxEditor extends React.Component {
     }
 }
 
-export default CommentBoxEditor;
+export default ReplyEditor;

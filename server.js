@@ -8,7 +8,7 @@ const cors = require('cors')
 
 const port = process.env.PORT || 8083;
 const router = express.Router()
-//app.use(cors())
+MongoDB.getCommentByID('wherever', 500, (result)=>{console.log( result)})
 MongoDB.setTestCollection();
 
 var allowCrossDomain = function(req, res, next) {
@@ -49,8 +49,6 @@ router.get('/api/getComments', (req, res) => {
 *
 */
 router.post('/api/addComment', (req, res) => {
-   
-       //req.on('data', function(data) {
        MongoDB.insertComment(req.body, 'comments')
         //console.log(req.body)
          res.end();

@@ -2,7 +2,7 @@ import React from 'react';
 import customStyles from  '../css/yakmosContainer.module.css'
 import sortCommentOptions from '../utils/sortCommentOptions.js'
 
-class YakmosWidget extends React.Component {
+class AppHeader extends React.Component {
     state = {
             sortExpandedVisibility: 'none',
             countExpandedVisibility: 'inline-block',
@@ -38,7 +38,7 @@ class YakmosWidget extends React.Component {
 
     render() {
         return(
-           <div     id='YakmosWidget' className={customStyles.yakmosWidget}
+           <div     id='AppHeader' className={customStyles.appHeader}
                     >   
                     <div className={customStyles.widgetTitle}
                     style={{display:this.state.titleExpandedVisibility}}
@@ -78,4 +78,4 @@ class YakmosWidget extends React.Component {
     }
 }
 
-export default YakmosWidget;
+export default AppHeader;

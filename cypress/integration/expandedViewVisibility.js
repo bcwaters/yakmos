@@ -11,17 +11,17 @@ describe('expand comments and check visibility', function() {
         }
     }
     it('has initial state hidden then items are visible on click', function() {
-        cy.visit('http://localhost:8080')
+        cy.visit('http://localhost:8083')
         //wait for the first api call to finish
         cy.wait(1500)
         //commentbox.row.col == commentChild commentBoxFooter
-        checkVisibility('#commentBoxFooter', false)
+       
         checkVisibility('#sortCommentsButton', false)
         checkVisibility('#comment', false)
-        checkVisibility('#commentBoxHeader', false)
+       
         cy.get('#expandCommentsButton').click()
         checkVisibility('#sortCommentsButton', true)
-        checkVisibility('#commentBoxHeader', true)
+    
         checkVisibility('#comment', true)
   })
     

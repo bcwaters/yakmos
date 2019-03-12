@@ -7,7 +7,7 @@ import customStyles from  '../css/yakmosContainer.module.css'
 //This will be it's own component since comments can be made from
 //different areas of the app
 
-class CommentBoxFooter extends React.Component {
+class AppFooter extends React.Component {
     state = {
       
     };
@@ -27,4 +27,4 @@ class CommentBoxFooter extends React.Component {
     }
 }
 
-export default CommentBoxFooter;
+export default AppFooter;

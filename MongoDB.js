@@ -49,6 +49,34 @@ class MongoDB{
         });
     }
     
+    static getCommentByID(originUrl, ID ,callback){
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db(dbName);
+            var query = { originUrl: originUrl };
+            dbo.collection(testCollection).find({ _id: { $eq: ID } } ).toArray(function(err, result) {
+            if (err) throw err;
+            console.log('retrieved comments for:' + originUrl + ' #: ' + result.length);
+            callback(result);
+            db.close();
+            });
+        });
+    }
+    
+    static updateCommentByID(originUrl, ID ,callback){
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db(dbName);
+            var query = { originUrl: originUrl };
+            dbo.collection(testCollection).find({ _id: { $eq: ID } } ).toArray(function(err, result) {
+            if (err) throw err;
+            console.log('retrieved comments for:' + originUrl + ' #: ' + result.length);
+            callback(result);
+            db.close();
+            });
+        });
+    }
+    
     
     static dropCollection(collectionName, callback){
         MongoClient.connect(url, function(err, db) {
@@ -72,27 +100,41 @@ class MongoDB{
     
     static insertTestCollections(){
         
-        
          MongoDB.insertComment({
+                _id: 500,
                 text: 'This is a comment that has been inserted into the mongoDB. it was the first comment to be inserted.',
                 user: 'frank',
-                commentAge: '1550000000000'
+                commentAge: '1550000000000',
+                parentID: 'root',
+      
         }, testCollection)
         MongoDB.insertComment({
                 text: 'not gonna say much',
                 user: 'larry',
-                commentAge: '1552240000000'
+                commentAge: '1552240000000',
+                parentID: 'root',
+         
         }, testCollection)
         MongoDB.insertComment({
                 text: 'not gonna say much again',
                 user: 'larry',
-                commentAge: '1550550000000'
+                commentAge: '1550550000000',
+                parentID: 'root',
+         
         }, testCollection)
         MongoDB.insertComment({
                 text: 'I woould lik to share a wall of text with you. So plase continue reading this text. otherwise i suppose you can stop reading it and move on to the next comment. but last time i check di was the last one to comment. so anyways i forgot what i wante dto say but it seems like this comment is long enough to test out the scenario of long comments',
                 user: 'anon56798',
-                commentAge: '1552241000000'
+                commentAge: '1552241000000',
+                parentID: 'root',
+     
         }, testCollection)
+        MongoDB.insertComment({
+                text:'Hi frank', user:'replier', commentAge:'1550000008800', parentID:500
+    
+        }, testCollection)
+        
+       
     }
 }
 
