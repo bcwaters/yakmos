@@ -1,5 +1,5 @@
 # Yakmos
-[Not Live Yet](https://github.com/bcwaters/yakmos)
+[yakmos.com](http://yakmos.com)
 
 #### Yakmos Chrome Extension
 A universal comment box for any url
@@ -31,7 +31,7 @@ note: make sure to add something to the mongoDB collection
 
 - you can also download the zip directly from here:
 
-[http://devwaters.com/download/universalCommentExtension.zip](http://devwaters.com/download/universalCommentExtension.zip)
+[http://yakmos.com/download/extension](http://yakmos.com/download/extension)
 
 ### Second  
 - In chrome url bar enter: chrome://extensions

@@ -37,14 +37,16 @@ class CommentBoxEditor extends React.Component {
         return {
                     user: 'anonUser',
                     text: this.state.editorState.getCurrentContent().getPlainText(),
-                    commentAge: currentTime
+                    commentAge: currentTime,
+                    children: [],
+                    parentID: 'root'
                 }
     }
 
     render() {
         return(
             <React.Fragment>
-            <div    id='commentBoxHeader' 
+            <div    id='commentBoxEditor' 
                     className={customStyles.commentBoxHeader} 
                     
             >

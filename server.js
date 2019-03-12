@@ -8,6 +8,7 @@ app.use(express.json())
 const port = process.env.PORT || 8083;
 const router = express.Router()
 
+MongoDB.getCommentByID('wherever', 500, (result)=>{console.log( result)})
 MongoDB.setTestCollection();
 
 
@@ -40,14 +41,12 @@ router.get('/api/getComments', (req, res) => {
 *
 */
 router.post('/api/addComment', (req, res) => {
-   
     //req.on('data', function(data) {
        MongoDB.insertComment(req.body, 'comments')
         //console.log(req.body)
          res.end();
    // }) 
 })
-
 
 app.use(router)
 //Start server

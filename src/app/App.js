@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import CommentBox from './components/CommentBox.js'
+import AppContainer from './components/AppContainer.js'
 
 export default class App extends Component {
     constructor(props) {
@@ -9,8 +9,8 @@ export default class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <CommentBox originURL='viewcommentsforthisurl.com'>
-        </CommentBox>
+        <AppContainer originURL='viewcommentsforthisurl.com'>
+        </AppContainer>
       </React.Fragment>
     );
   }

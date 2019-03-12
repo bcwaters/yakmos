@@ -1,8 +1,9 @@
 import React from 'react';
 import Comment from './Comment.js'
-import CommentBoxEditor from './CommentBoxHeader.js'
-import CommentBoxFooter from './CommentBoxFooter.js'
-import YakmosWidget from './YakmosWidget.js'
+import CommentBoxEditor from './CommentBoxEditor.js'
+import AppFooter from './AppFooter.js'
+import AppHeader from './AppHeader.js'
+import CommentSection from './CommentSection.js'
 import customStyles from  '../css/yakmosContainer.module.css'
 import sortCommentOptions from '../utils/sortCommentOptions.js'
 
@@ -13,10 +14,10 @@ const styles ={
 const apiUrl = 'http://localhost:8083/api/getComments'
 
 //TODO ADD INFINITE SCROLLING
-//container = the element div for commentBoxContainer
+//container = the element div for AppContainer
 //reached end when container.offsetHeight + container.scrollTop  == container.scrollHeight
 
-class CommentBox extends React.Component {
+class AppContainer extends React.Component {
     state = {
         sortPref : sortCommentOptions.oldest,
         comments : [],
@@ -52,32 +53,31 @@ class CommentBox extends React.Component {
     sortComments = (sortFunction) => {
         let sorted = this.state.comments.sort(sortFunction)
         this.setState({comments: sorted})
-           
-        
     }
 
     render() {
     return (
-        <div id='commentBoxContainer' className={customStyles.commentBoxContainer}>
-                <YakmosWidget 
+        <div id='AppContainer' className={customStyles.AppContainer}>
+                <AppHeader 
                     originURL={this.props.originURL}
                     expandFunction = {this.expandComments}
                     commentCount= {this.state.comments.length}
                     sortComments = {this.sortComments}
                     />
                 <CommentBoxEditor 
-                    visibility={this.state.commentDisplay}
                     addComment={this.addComment}
                     />
-        
-                    {this.state.comments.map((comment) =>
-                    <Comment key={comment.id} comment={comment} visibility={this.state.commentDisplay} />
-                    )}
-             
-                <CommentBoxFooter visibility={this.state.commentDisplay}/>
+                <CommentSection 
+                    comments={this.state.comments} 
+                    commentDisplay={this.state.commentDisplay} 
+                    />
+                 
+                <AppFooter 
+                    visibility={this.state.commentDisplay}  
+                    />
         </div>
     );
   }
 }
 
-export default CommentBox;
+export default AppContainer;

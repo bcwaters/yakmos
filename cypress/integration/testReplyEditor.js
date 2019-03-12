@@ -2,7 +2,7 @@
 //has 3 children which are comments.
 //At the moment the database has three children.
 
-describe('Testing draft editor and Comment Button', function() {
+describe('Testing reply editor and Comment Button', function() {
   it('type text and submit it', function() {
         cy.visit('http://localhost:8083')
         //wait for the first api call to finish
@@ -11,6 +11,7 @@ describe('Testing draft editor and Comment Button', function() {
         cy.get('#commentCountBadge').then( ($startLength)=> {
             let startLength = $startLength.text()
             cy.get('#expandCommentsButton').click()
+            cy.get('#replyLink').last().click();
             cy.get('.public-DraftEditor-content').click().type('test comment')
             cy.get('#expandCommentsButton').click()
             
@@ -23,7 +24,7 @@ describe('Testing draft editor and Comment Button', function() {
   })
 })
 
-describe('Testing draft editor and Cancel Button', function() {
+describe('Testing reply editor and Cancel Button', function() {
   it('Type text and then cancel it', function() {
         cy.visit('http://localhost:8083')
         //wait for the first api call to finish

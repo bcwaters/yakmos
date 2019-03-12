@@ -6,8 +6,10 @@ const hiddenMessageText = 'comment currently hidden click show to view this comm
 
 class CommentReplies extends React.Component {
     state = {   
+       
         expanded: false,
-        childrenDisplay:'none'
+        childrenDisplay:'none',
+     
     };
     constructor(props) {
         super(props)
@@ -27,11 +29,15 @@ class CommentReplies extends React.Component {
         return (
             <div className={customStyles.repliesContainter}>
                 <div className={customStyles.commentReplies} id='commentReplies' onClick={()=>{this.expandChildren()}}>
-                     {this.state.expanded?'- hide replies':'+ View '+ this.props.children.length +' replies'} 
+                    {this.state.expanded?'- Hide replies':'+ View '+this.props.replyCount+' replies'} 
                 </div>
                
-                {this.props.children.map((comment) =>
-                    <Comment key={'55'} comment={comment} visibility={this.state.childrenDisplay} />
+                {this.props.comments.filter((comment)=>{
+                    return comment.parentID==this.props.parentID
+                }).map((comment, index, array) =>
+                      
+                       <Comment key={comment._id} comment={comment} visibility={this.state.childrenDisplay} comments={this.props.comments}/>
+                
                 )}
                 
             </div>
