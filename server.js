@@ -3,9 +3,10 @@ const path  = require('path')
 const MongoDB =  require('./MongoDB.js')
 //const bodyParser = require('body-parser')
 const app = express()
-app.use(express.json())
 const cors = require('cors')
+app.use(express.json())
 
+app.use(cors());
 const port = process.env.PORT || 8083;
 const router = express.Router()
 MongoDB.getCommentByID('wherever', 500, (result)=>{console.log( result)})
