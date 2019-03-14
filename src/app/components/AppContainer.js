@@ -4,6 +4,7 @@ import CommentBoxEditor from './CommentBoxEditor.js'
 import AppFooter from './AppFooter.js'
 import AppHeader from './AppHeader.js'
 import CommentSection from './CommentSection.js'
+import InfoSection from './InfoSection.js'
 import customStyles from  '../css/yakmosContainer.module.css'
 import sortCommentOptions from '../utils/sortCommentOptions.js'
 import Api from '../utils/ApiCalls.js'
@@ -27,9 +28,11 @@ class AppContainer extends React.Component {
         collectionName: 'comments'
     };
     componentDidMount(){
+        console.log('App was provided with URL: ' + this.props.collectionName)
+        let urlHostname = new URL(this.props.collectionName).hostname
         this.removeYoutubeHotkeys()
-        
-        Api.getCommentsCollection(this.state.collectionName,
+        //changing collectionName to urlHostname for testing
+        Api.getCommentsCollection(urlHostname,
                 (commentsFound)=>{ 
                     commentsFound.sort(sortCommentOptions.oldest)  
                     this.setState( {comments : commentsFound})
@@ -39,7 +42,14 @@ class AppContainer extends React.Component {
     }
 
     updateCollectionName = (updatedName) =>{
-        this.setState({collectionName: updatedName})
+        this.setState({collectionName: updatedName},
+                     Api.getCommentsCollection(updatedName,
+                (commentsFound)=>{ 
+                    commentsFound.sort(sortCommentOptions.oldest)  
+                    this.setState( {comments : commentsFound})
+               }
+        )
+                     )
     }
 
     //this logic probably belongs in the content script for the extension
@@ -92,15 +102,24 @@ class AppContainer extends React.Component {
                     sortComments = {this.sortComments}
                     updateCollectionName = {this.updateCollectionName}
                     />
+                <div id='topRowContainer' className={customStyles.topRowContainer}>
                 <CommentBoxEditor 
                     removeHotKeys={()=>{this.removeYoutubeHotkeys()}}
                     addComment={this.addComment}
-                    collectionName={this.state.collectionName}
+                    collectionName={new URL(this.props.collectionName).hostname}
                     />
+                        
+                <InfoSection 
+                    collectionName={this.state.collectionName}
+                    commentCount= {this.state.comments.length}
+                    userName='anon'
+                    currentUrl = {this.props.collectionName}
+                />
+                </div>
                 <CommentSection 
                     comments={this.state.comments} 
                     commentDisplay={this.state.commentDisplay} 
-                    collectionName={this.state.collectionName}
+                    collectionName={new URL(this.props.collectionName).hostname}
                     />
                  
                 <AppFooter 

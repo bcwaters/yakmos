@@ -36,8 +36,12 @@ class CommentReplies extends React.Component {
                     return comment.parentID==this.props.parentID
                 }).map((comment, index, array) =>
                       
-                       <Comment key={comment._id} comment={comment} visibility={this.state.childrenDisplay} comments={this.props.comments}/>
-                
+                       <Comment key={comment._id} 
+                                comment={comment} 
+                                visibility={this.state.childrenDisplay} 
+                                comments={this.props.comments}
+                                collectionName={this.props.collectionName}
+                       />
                 )}
                 
             </div>

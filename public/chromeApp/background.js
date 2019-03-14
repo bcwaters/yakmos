@@ -1,7 +1,5 @@
 // Called when the user clicks on the browser action
 chrome.browserAction.onClicked.addListener(function(tab) {
-   // Send a message to the active tab
-    console.log('extension clicked sending message to tab')
    chrome.tabs.query({active: true, currentWindow:true},
       function(tabs) {
          var activeTab = tabs[0];
@@ -10,3 +8,18 @@ chrome.browserAction.onClicked.addListener(function(tab) {
          );
    });
 });
+
+var appUrl = '';
+setInterval(function(){//every second
+      chrome.tabs.query({active: true, currentWindow:true},
+      function(tabs) {
+        var activeTab = tabs[0];
+        if(appUrl != activeTab.url){
+            console.log('new url')
+            appUrl = activeTab.url
+            chrome.tabs.sendMessage(activeTab.id, 
+                {"updateUrl": activeTab.url}
+                );
+            }
+        });
+},1000);

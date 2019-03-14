@@ -118,7 +118,13 @@ class Comment extends React.Component {
                 {this.state.editor}
                 
 
-                {( !this.state.hidden && this.state.replyCount>0)?<CommentReplies parentID={this.props.comment._id} comments={this.props.comments} replyCount={this.state.replyCount}/>:''}
+                {( !this.state.hidden && this.state.replyCount>0)?<CommentReplies 
+                        parentID={this.props.comment._id} 
+                        comments={this.props.comments} 
+                        replyCount={this.state.replyCount}
+                        collectionName={this.props.collectionName}
+                        />
+                    :''}
             </div>
         );
     }

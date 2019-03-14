@@ -40,10 +40,10 @@ class AppHeader extends React.Component {
         return(
            <div     id='AppHeader' className={customStyles.appHeader}
                     >   
-                    <div className={customStyles.widgetTitle}
+                    <div className={customStyles.widgetTitle_REMOVED}
                     style={{display:this.state.titleExpandedVisibility}}
                     >
-                            <span>Universal Comment Box</span>
+                         
                     </div>
                     <button     className={customStyles.expandButton}
                                 id='expandCommentsButton' 

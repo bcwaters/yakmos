@@ -18,10 +18,13 @@ module.exports = {
     },
     plugins: [
         new CopyPlugin([
-            {from: './public/manifest.json', to: './manifest.json' },
+            {from: './public/chromeApp/manifest.json', to: './manifest.json' },
             {from: './public/chromeApp/background.js', to: './background.js' },
             {from: './public/chromeApp/directions.txt', to: './directions.txt' },
-            {from: './public/Draft.css', to: './Draft.css' },
+            {from: './public/chromeApp/yakmosIcon16.png', to: './yakmosIcon16.png' },
+            {from: './public/chromeApp/yakmosIcon48.png', to: './yakmosIcon48.png' },
+            {from: './public/chromeApp/yakmosIcon128.png', to: './yakmosIcon128.png' },
+            {from: './public/chromeApp/Draft.css', to: './Draft.css' },
         ]),
         new HtmlWebpackPlugin({
             template: "./public/index.html",
@@ -34,7 +37,7 @@ module.exports = {
         filename: 'chromeContent-bundle.js'
   },
     entry: {
-        app: './src/chromeContent.js',
+        app: './public/chromeApp/chromeContent.js',
      
 },
 };

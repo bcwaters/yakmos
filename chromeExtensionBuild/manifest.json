@@ -4,8 +4,12 @@
     "version": "0.1",
     "description": "View comments for any url",
     "browser_action": {
-        
+      
     },
+    "icons": { "16": "yakmosIcon16.png",
+               "48": "yakmosIcon48.png",
+               "128": "yakmosIcon128.png" },
+    
     "background": {
     "scripts": ["/background.js"]
     },

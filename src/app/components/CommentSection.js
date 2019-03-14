@@ -25,7 +25,8 @@ class CommentSection extends React.Component {
         return (
             <div className={customStyles.commentSection} id='commentSection'>
              
-                {this.props.comments.filter(comment => {
+                {this.props.comments.length==0? 'No comments left on this page left':
+                this.props.comments.filter(comment => {
                         return comment.parentID == 'root'
                         }).map((comment, index, filteredComments) =>
                             <Comment 

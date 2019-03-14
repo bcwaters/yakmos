@@ -9,7 +9,7 @@ export default class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <AppContainer originURL='viewcommentsforthisurl.com'>
+        <AppContainer collectionName={this.props.collectionName}>
         </AppContainer>
       </React.Fragment>
     );
