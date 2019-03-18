@@ -1,16 +1,17 @@
 const express = require( 'express')
 const path  = require('path')
 const MongoDB =  require('./MongoDB.js')
+const cors = require('cors')
 //const bodyParser = require('body-parser')
 const app = express()
 app.use(express.json())
+app.use(cors())
  
 const port = process.env.PORT || 8083;
 const router = express.Router()
 
-MongoDB.getCommentByID('wherever', 500, (result)=>{console.log( result)})
+//MongoDB.getCommentByID('wherever', 500, (result)=>{console.log( result)})
 MongoDB.setTestCollection();
-
 
 //set up dist as static folder
 router.use('/', express.static(path.join(__dirname, 'dist')));

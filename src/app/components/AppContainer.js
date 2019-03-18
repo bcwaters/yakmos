@@ -8,6 +8,8 @@ import InfoSection from './InfoSection.js'
 import customStyles from  '../css/yakmosContainer.module.css'
 import sortCommentOptions from '../utils/sortCommentOptions.js'
 import Api from '../utils/ApiCalls.js'
+import URLConverter from '../utils/URLConverter.js'
+
 const styles ={
     commentBoxHeader:{backgroundColor:'lightgrey',borderStyle:'solid', borderWidth:'1px', borderColor:'blue', padding:'0px'} 
 }
@@ -15,8 +17,6 @@ const styles ={
 //TODO ADD INFINITE SCROLLING
 //container = the element div for AppContainer
 //reached end when container.offsetHeight + container.scrollTop  == container.scrollHeight
-
-
 
 class AppContainer extends React.Component {
     //note: Collection name corresponds to the Current URL the user is on
@@ -27,14 +27,15 @@ class AppContainer extends React.Component {
         commentDisplay: 'none',
         collectionName: 'comments'
     };
+
     componentDidMount(){
-        console.log('App was provided with URL: ' + this.props.collectionName)
-        let urlHostname = new URL(this.props.collectionName).hostname
+        console.log('App was provided with CollectionName: ' + this.props.collectionName)
+        
         this.removeYoutubeHotkeys()
         //changing collectionName to urlHostname for testing
-        Api.getCommentsCollection(urlHostname,
+        Api.getCommentsCollection(this.props.collectionName,
                 (commentsFound)=>{ 
-                    commentsFound.sort(sortCommentOptions.oldest)  
+                    commentsFound.sort(sortCommentOptions.oldest) 
                     this.setState( {comments : commentsFound})
                }
         )
@@ -106,7 +107,7 @@ class AppContainer extends React.Component {
                 <CommentBoxEditor 
                     removeHotKeys={()=>{this.removeYoutubeHotkeys()}}
                     addComment={this.addComment}
-                    collectionName={new URL(this.props.collectionName).hostname}
+                    collectionName={this.props.collectionName}
                     />
                         
                 <InfoSection 
@@ -119,7 +120,7 @@ class AppContainer extends React.Component {
                 <CommentSection 
                     comments={this.state.comments} 
                     commentDisplay={this.state.commentDisplay} 
-                    collectionName={new URL(this.props.collectionName).hostname}
+                    collectionName={this.props.collectionName}
                     />
                  
                 <AppFooter 

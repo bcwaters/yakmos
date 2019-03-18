@@ -2,6 +2,11 @@ import React from 'react';
 import Comment from './Comment.js'
 import customStyles from  '../css/yakmosContainer.module.css'
 
+const NoComments = function(props){
+        return <div display={props.display}>No comment have been left on this page yet</div>
+    }
+
+
 class CommentSection extends React.Component {
     state = {   
         expanded: false,
@@ -20,12 +25,14 @@ class CommentSection extends React.Component {
             this.setState({commentDisplay:'none'})
         }
     }
-    
+     
     render() {
         return (
             <div className={customStyles.commentSection} id='commentSection'>
              
-                {this.props.comments.length==0? 'No comments left on this page left':
+                {this.props.comments.length==0? 
+                <NoComments display={this.props.commentDisplay}/>
+                :
                 this.props.comments.filter(comment => {
                         return comment.parentID == 'root'
                         }).map((comment, index, filteredComments) =>

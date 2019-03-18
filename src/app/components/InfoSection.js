@@ -8,7 +8,7 @@ import customStyles from  '../css/yakmosContainer.module.css'
 
 class InfoSection extends React.Component {
     state = {
-      
+      url : document.URL,
     };
    
     componentDidMount(){     
@@ -20,9 +20,10 @@ class InfoSection extends React.Component {
                     INFO SECTION <br/>
                     userName: {this.props.userName} [Login link] <br/>
                     commentCount: {this.props.commentCount}  <br/>
-                    currentDBCollection: {new URL(this.props.currentUrl).hostname}  <br/>
-                    currentUrl Hostname: {new URL(this.props.currentUrl).hostname}  <br/>
-                    currentUrl Path: {new URL(this.props.currentUrl).pathname}
+                    currentDBCollection: {new URL(this.state.url).hostname}  <br/>
+                    currentUrl Hostname: {new URL(this.state.url).hostname}  <br/>
+                    currentUrl Path: {new URL(this.state.url).pathname}  <br/>
+                    search params: {new URL(this.state.url).search}
                 </div>
             )
     }

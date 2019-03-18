@@ -40,13 +40,14 @@ class MongoDB{
         MongoClient.connect(url, function(err, db) {
             if (err) throw err;
             var dbo = db.db(dbName);
-           
-            dbo.collection(collectionName).find({}).toArray(function(err, result) {
-            if (err) throw err;
-            console.log('retrieved comments for:' + collectionName + ' #: ' + result.length);
-            callback(result);
-            db.close();
-            });
+            console.log('getcomments for: ' + collectionName);
+            dbo.collection(collectionName).find({}).toArray(
+                function(err, result) {
+                    if (err) throw err;
+                    console.log('retrieved comments for:' + collectionName + ' #: ' + result.length);
+                    callback(result);
+                    db.close();
+                });
         });
     }
     

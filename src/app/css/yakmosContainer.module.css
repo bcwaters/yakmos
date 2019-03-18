@@ -97,6 +97,7 @@
     grid-column: 2/3;
     margin: 10px;
     border: solid purple 2px;
+    overflow:hidden;
     
 }
 
