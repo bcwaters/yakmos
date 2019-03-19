@@ -15,29 +15,32 @@ chrome.runtime.onMessage.addListener(
             var oldApp = document.getElementById('reactApp')
             document.body.removeChild(oldApp)
             //document.body.appendChild(comments);
-            document.body.appendChild(makeRootElement('reactApp'))
-            
-                
-            ReactDOM.render(<App collectionName={request.updateUrl}/>,
+            document.body.appendChild(makeRootElement('reactApp'))           
+            ReactDOM.render(<App    collectionName={request.updateUrl}
+                                    sendCount={sendResponse}
+                            />,
                         document.getElementById("reactApp"));
+        
       }
-   }
+        return true; //makes this async for sendresponse
+    }
 )
+
+function changeBadgeCount(response) {                                      
+    chrome.extension.sendMessage(response)
+                                        
+}
+
 
 
 document.body.appendChild(makeRootElement('reactApp'));
-
 //Add the app with the tab url as the collectionName                    
-
-         
     if(document.getElementById("reactApp")){
-    
-        ReactDOM.render(<App collectionName={document.URL}/>,
+        ReactDOM.render(<App    collectionName={document.URL}
+                                sendCount={changeBadgeCount}
+                        />,
                         document.getElementById("reactApp"));
     }
-
-    
-    
 
 function toggle(){
     let comments = document.getElementById('reactApp');

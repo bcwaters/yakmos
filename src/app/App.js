@@ -10,7 +10,8 @@ export default class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <AppContainer collectionName={URLConverter.convertURL(this.props.collectionName)}>
+        <AppContainer    sendCount={this.props.sendCount}
+                        collectionName={URLConverter.convertURL(this.props.collectionName)}>
         </AppContainer>
       </React.Fragment>
     );

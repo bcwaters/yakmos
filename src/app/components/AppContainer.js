@@ -35,7 +35,8 @@ class AppContainer extends React.Component {
         //changing collectionName to urlHostname for testing
         Api.getCommentsCollection(this.props.collectionName,
                 (commentsFound)=>{ 
-                    commentsFound.sort(sortCommentOptions.oldest) 
+                    commentsFound.sort(sortCommentOptions.oldest)
+                    if(this.props.sendCount){this.props.sendCount({count : commentsFound.length})}
                     this.setState( {comments : commentsFound})
                }
         )

@@ -20,6 +20,8 @@ module.exports = {
         new CopyPlugin([
             {from: './public/chromeApp/manifest.json', to: './manifest.json' },
             {from: './public/chromeApp/background.js', to: './background.js' },
+            {from: './public/chromeApp/popup.html', to: './popup.html' },
+               {from: './public/chromeApp/popup.js', to: './popup.js' },
             {from: './public/chromeApp/directions.txt', to: './directions.txt' },
             {from: './public/chromeApp/yakmosIcon16.png', to: './yakmosIcon16.png' },
             {from: './public/chromeApp/yakmosIcon48.png', to: './yakmosIcon48.png' },
